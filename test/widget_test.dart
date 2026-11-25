@@ -1,20 +1,14 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-// ignore: unused_import
 import 'package:analytics_dashboard/main.dart';
 
 void main() {
-  testWidgets('Analytics dashboard loads correctly',
+  testWidgets('SCADA App initial render test (AuthGuard / Loading)',
       (WidgetTester tester) async {
-    await tester.pumpWidget(const AnalyticsApp() as Widget);
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
 
-    expect(find.text('Analytics / Reportes'), findsOneWidget);
-    expect(find.text('Generar'), findsOneWidget);
-    expect(find.text('Producción'), findsWidgets);
-    expect(find.text('Fallas'), findsWidgets);
+    // Verify that the initial AuthGuard loading screen renders with CircularProgressIndicator
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
-}
-
-class AnalyticsApp {
-  const AnalyticsApp();
 }
